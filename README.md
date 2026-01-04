@@ -30,18 +30,15 @@ O foco inicial do projeto é apenas entender o fluxo de um projeto de streaming 
 
 ```
 ┌─────────────┐        WebSocket        ┌──────────────┐        WebSocket        ┌──────────────┐  
-│  Remo WPF   │  ───────────────────>   │ Remo Server  │  ───────────────────>   │  Remo Agent  │
-│  (Client)   │  <───────────────────   │   (Relay)    │  <───────────────────   │    (Host)    │
+│  Remo WPF   │  ───────────────────>   │ Remo Server  │  ───────────────────>   │   Remo WPF   │
+│   (Host)    │  <───────────────────   │   (Relay)    │  <───────────────────   │   (Client)   │
 └─────────────┘        WebSocket        └──────────────┘        WebSocket        └──────────────┘                    
 ```
 
 ### Componentes
 
-- **Remo Desktop (WPF)**  
-  Interface gráfica para iniciar e controlar sessões.
-
-- **Remo Agent**  
-  Serviço que roda na máquina remota e expõe funcionalidades controladas.
+- **Remo Desktop (WPF - Host)**  
+  Interface gráfica que recebe o acesso. Após o aceite, captura os dados e envia pela rede enquanto aguarda ações do Host.
 
 - **Remo Server (Relay)**  
   Responsável por intermediar conexões, autenticação e roteamento.
@@ -49,6 +46,8 @@ O foco inicial do projeto é apenas entender o fluxo de um projeto de streaming 
 - **Remo Transport**  
   Camada de abstração de transporte (WebSocket / QUIC futuramente).
 
+- **Remo Desktop (WPF - Client)**  
+  Interface gráfica que inicia o acesso. Após o aceite, recebe os dados do host, realiza ações e propaga de volta para o Host.
 ---
 
 ## 🔌 Camada de Transporte
